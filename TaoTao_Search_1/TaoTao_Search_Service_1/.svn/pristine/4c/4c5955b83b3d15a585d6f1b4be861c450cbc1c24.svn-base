@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.taotao_1</groupId>
+    <artifactId>TaoTao_Search_1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>TaoTao_Search_Service_1</artifactId>
+  <packaging>war</packaging>
+  <name>TaoTao_Search_Service_1</name>
+  <description>搜索服务的业务</description>
+  <!-- 添加依赖 -->
+  <dependencies>
+  
+  		<!-- 全局dao的依赖 -->
+  			<dependency>
+  						<groupId>org.taotao_1</groupId>
+  						<artifactId>TaoTao_Manager_Dao_1</artifactId>
+  						<version>${project.version}</version>	
+  			</dependency>
+ 		<!-- 依赖SearchDao -->
+ 		<dependency>
+					<groupId>org.taotao_1</groupId>
+					<artifactId>TaoTao_Search_Dao_1</artifactId>
+					<version>${project.version}</version> 		
+ 		</dependency>
+  		<!-- SearchInterface的依赖 -->
+  		<dependency>
+  				<groupId>org.taotao_1</groupId>
+  				<artifactId>TaoTao_Search_Interface_1</artifactId>
+  				<version>${project.version}</version>
+  		</dependency>
+  			<!-- dubbo相关 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.zookeeper</groupId>
+				<artifactId>zookeeper</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>com.github.sgroschupf</groupId>
+				<artifactId>zkclient</artifactId>
+			</dependency>
+			
+			
+			
+  
+  
+  
+  </dependencies>
+  	
+  
+  
+  
+  
+</project>

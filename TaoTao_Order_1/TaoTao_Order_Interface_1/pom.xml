@@ -1,0 +1,21 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.taotao_1</groupId>
+    <artifactId>TaoTao_Order_1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>TaoTao_Order_Interface_1</artifactId>
+  <name>TaoTao_Order_Interface_1</name>
+  <description>订单的相关接口服务</description>
+  <!-- 添加依赖 -->
+  <dependencies>
+  <!-- 以来一个pojo -->
+  		<dependency>
+  				<groupId>org.taotao_1</groupId>
+  				<artifactId>TaoTao_Order_Pojo_1</artifactId>
+  				<version>${project.version}</version>
+  		</dependency>
+  </dependencies>
+  
+</project>

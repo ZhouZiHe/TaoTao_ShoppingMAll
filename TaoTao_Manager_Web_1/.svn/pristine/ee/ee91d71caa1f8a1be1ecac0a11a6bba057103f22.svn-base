@@ -1,0 +1,5 @@
+org\taotao\controller\ContentCategoryController.class
+org\taotao\controller\ItemCatController.class
+org\taotao\controller\PageController.class
+org\taotao\controller\PictureController.class
+org\taotao\controller\ItemController.class

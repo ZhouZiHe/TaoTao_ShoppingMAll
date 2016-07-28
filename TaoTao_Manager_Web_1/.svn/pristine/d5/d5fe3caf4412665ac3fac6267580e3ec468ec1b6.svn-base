@@ -1,0 +1,76 @@
+package org.taotao.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.taotao.common.pojo.EasyUIDataGridResult;
+import org.taotao.common.pojo.TaotaoResult;
+import org.taotao.pojo.TbItemParam;
+import org.taotao.service.ItemParamService;
+
+import com.sun.tools.javah.resources.l10n;
+
+/**
+ * <p>Title: ItemParam</p>
+ * <p>Description:操作关于规格参数 </p>
+ * <p>Email: zhouzihe@hotmail.com</p> 
+ * @author	Zack
+ * @date	2015年12月29日
+ * @version 1.0
+ */
+@Controller
+public class ItemParamController {
+	
+	@Autowired//在这里注入一个itemServiceParams
+	private ItemParamService itemParamService;
+	
+//1.0 查询商品的规格参数	
+@RequestMapping("/item/param/list")
+	public@ResponseBody EasyUIDataGridResult getItemParamList(Integer page,Integer rows){
+//		调用接口调用方法
+	EasyUIDataGridResult easyUIDataGridResult = itemParamService.getItemParamCatPageList(page, rows);
+//放回结果
+	return easyUIDataGridResult;
+}
+//2.0 添加商品的额规格参数的判断
+@RequestMapping("/item/param/query/itemcatid/{catId}")
+public @ResponseBody TaotaoResult checkParamCatId(@PathVariable long catId){
+// 调用service方法
+	TaotaoResult taotaoResult = itemParamService.checkParamCat(catId);
+//	返回一Taotaoresult
+	return taotaoResult;
+}
+//3.0 提交添加购物车
+@RequestMapping("/item/param/save/{cid}")
+public @ResponseBody TaotaoResult addParam(@PathVariable long cid,String paramData ){
+//	调用service的方法进行传递一个类文件
+	TbItemParam tbItemParam=new  TbItemParam();
+// 进行赋值
+	tbItemParam.setItemCatId(cid);
+	tbItemParam.setParamData(paramData);
+//	调用service的方法进行添加
+	TaotaoResult taotaoResult = itemParamService.insertItemParam(tbItemParam);
+//	返回结果
+	return taotaoResult;
+}
+//4.0编辑展示界面
+@RequestMapping("/item/param/editPage/{paramId}")
+public String showItemParamEditPage(@PathVariable long paramId,Model model){
+//	4.1调用service方法进行取值
+	TbItemParam tbItemParam = itemParamService.geTbItemParamById(paramId);
+//	4.2将对放入到model中
+	model.addAttribute("itemParam",tbItemParam );
+// 4.3返回结果视图
+	return "/item-param-edit";
+}
+//5.0编辑规格参数
+@RequestMapping("/item/param/edit/{paramId}")
+public TaotaoResult editParam(@PathVariable long paramId){
+	
+	return  null;
+}
+
+}

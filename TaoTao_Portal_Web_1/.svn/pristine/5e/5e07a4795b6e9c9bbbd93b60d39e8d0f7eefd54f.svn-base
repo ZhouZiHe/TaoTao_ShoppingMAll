@@ -1,0 +1,27 @@
+package org.taotao.portal.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+/**
+ * 
+ * <p>Title: IndexController</p>
+ * <p>Description:前台展示门户 </p>
+ * <p>Email: zhouzihe@hotmail.com</p> 
+ * @author	Zack
+ * @date	2015年12月17日
+ * @version 1.0
+ */
+@Controller
+public class IndexController {
+
+//	1.0展示首页
+	@RequestMapping("/index")
+	public String showIndex(){
+		return "index";
+	}
+	
+	
+	
+	
+}

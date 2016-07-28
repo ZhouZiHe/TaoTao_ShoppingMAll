@@ -1,0 +1,68 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.taotao_1</groupId>
+    <artifactId>TaoTao_Parent_1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>org.taotao_1</groupId>
+  <artifactId>TaoTao_Order_1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>TaoTao_Order_1</name>
+  <description>订单的聚合工程</description>
+  <modules>
+  	<module>TaoTao_Order_Interface_1</module>
+  	<module>TaoTao_Order_Service_1</module>
+  	<module>TaoTao_Order_Pojo_1</module>
+  </modules>
+  
+  
+  <!-- 添加依赖 -->
+  <dependencies>
+  		<dependency>
+  				<groupId>org.taotao_1</groupId>
+  				<artifactId>TaoTao_Common_1</artifactId>
+  				<version>${project.version}</version>
+  		</dependency>
+  		<!-- 配置dao依赖 -->
+  		<dependency>
+  				<groupId>org.taotao_1</groupId>
+  				<artifactId>TaoTao_Manager_Dao_1</artifactId>
+  				<version>${project.version}</version>
+  		</dependency>
+  		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+  </dependencies>
+    <!-- 配置tomcat的插件 -->
+  <build>
+  		<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<configuration>
+							<path>/</path>
+						<port>129</port>
+					    <ajpPort>8049</ajpPort>
+					</configuration>
+				</plugin>  		
+  		</plugins>
+  </build>
+  
+  
+  
+  
+  
+  
+  
+  
+</project>

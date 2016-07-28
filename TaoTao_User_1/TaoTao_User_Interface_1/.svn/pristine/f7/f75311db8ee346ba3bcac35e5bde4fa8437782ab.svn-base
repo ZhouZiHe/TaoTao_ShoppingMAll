@@ -1,0 +1,3 @@
+org\taotao\user\service\jedisclient\JedisClient.class
+org\taotao\user\service\LoginService.class
+org\taotao\user\service\RegisterService.class

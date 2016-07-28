@@ -1,0 +1,57 @@
+package org.taotao.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.taotao.common.pojo.EasyUIDataGridResult;
+import org.taotao.dao.TbItemMapper;
+import org.taotao.pojo.TbItem;
+import org.taotao.pojo.TbItemExample;
+import org.taotao.service.ItemService;
+
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+/**
+ * <p>Title: ItemServiceImpl</p>
+ * <p>Description: ItemService接口实现类</p>
+ * <p>Email: zhouzihe@hotmail.com</p> 
+ * @author	Zack
+ * @date	2015年12月12日
+ * @version 1.0
+ */
+@Service
+public class ItemServiceImpl implements ItemService {
+	
+	@Autowired//在这里注入一个itemMapper
+	private TbItemMapper tbItemMapper;
+	
+//1.0	通过id查找商品
+	@Override
+	public TbItem findItemById(long itemId){
+		TbItem item=tbItemMapper.selectByPrimaryKey(itemId);
+		return item;
+	}
+	
+//	2.0	分页查询商品列表
+@Override	
+public EasyUIDataGridResult getItemList(int page,int rows){
+//	2.1 分页处理
+		PageHelper.startPage(page, rows);
+//	2.2 执行查询
+		TbItemExample tbItemExample=new TbItemExample();
+		List<TbItem> list=tbItemMapper.selectByExample(tbItemExample);
+//	2.3获取分页信息
+		PageInfo<TbItem> pageInfo=new PageInfo<>(list);
+//	2.4 初始化一个包装类的对象
+		EasyUIDataGridResult	 easyUIDataGridResult=new EasyUIDataGridResult();
+//	2.5向包装类中添加数据
+		easyUIDataGridResult.setRows(list);
+		easyUIDataGridResult.setTotal(easyUIDataGridResult.getTotal());
+//	2.6将分页的到的包装类对象结果返回
+		return easyUIDataGridResult;
+	}
+	
+	
+	
+}

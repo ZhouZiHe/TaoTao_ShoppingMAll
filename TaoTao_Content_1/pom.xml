@@ -1,0 +1,47 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.taotao_1</groupId>
+    <artifactId>TaoTao_Parent_1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>org.taotao_1</groupId>
+  <artifactId>TaoTao_Content_1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>TaoTao_Content_1</name>
+  <description>内容系统服务	</description>
+  
+  <dependencies>
+  <!-- 依赖后台管理的dao -->
+		<dependency>
+			<groupId>org.taotao_1</groupId>
+			<artifactId>TaoTao_Manager_Dao_1</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+<!-- 依赖common -->
+		<dependency>
+			<groupId>org.taotao_1</groupId>
+			<artifactId>TaoTao_Common_1</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- 配置Tomcat插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<path>/</path>
+					<port>93</port>
+					<ajpPort>8013</ajpPort>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
+  
+  
+  
+</project>

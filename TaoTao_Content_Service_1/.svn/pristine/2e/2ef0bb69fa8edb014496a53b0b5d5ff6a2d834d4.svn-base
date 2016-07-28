@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+	http://www.springframework.org/schema/context  
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+	http://code.alibabatech.com/schema/dubbo  
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+	http://www.springframework.org/schema/aop  
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+	http://www.springframework.org/schema/mvc  
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd  
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+	http://www.springframework.org/schema/tool   
+	http://www.springframework.org/schema/tool/spring-tool-4.0.xsd  
+	http://www.springframework.org/schema/util  
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd " >
+<!-- 一共要编写两个相关的jedis的连接方式添加 -->
+	<!-- 1.0第一个链接方式是单机版的jedis链接redis数据库  -->
+	<!-- 1.1注入一个jedispool -->
+	<!-- <bean id="" class="redis.clients.jedis.JedisPool">
+			<constructor-arg name="host" value="192.168.179.130"/>
+			<constructor-arg name="port" value="6379"/>
+	</bean>
+	1.2注入一个单机版的jedis接口服务的实现类
+	<bean id="poolJedisClientImpl" class="org.taotao.content.service.jedisclient.impl.PoolJedisClientImpl">
+	 -->
+		
+<!-- 2.0第二个链接方式是集群版的redis链接redis数据库 -->	
+	<!--2.1 注入一个jedis的服务接口的实现类实现类 -->
+	<bean id="jedisClusterClientImpl"  class="org.taotao.content.service.jedisclient.impl.JedisClusterClientImpl" />
+	<!--2.2 注入JedisCluseter -->	
+	<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
+		<constructor-arg  >
+				<set>
+				<!-- 第一个是130网段的redis服务器 -->
+						<bean  class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7000"/>
+						</bean>				
+						<bean  class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7001"/>
+						</bean>				
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7002"/>
+						</bean>				
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7003"/>
+						</bean>				
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7004"/>
+						</bean>				
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7005"/>
+						</bean>				
+						<bean  class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7006"/>
+						</bean>				
+						<bean  class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7007"/>
+						</bean>				
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7008"/>
+						</bean>				
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg  name="host" value="192.168.179.130"/>
+								<constructor-arg name="port" value="7009"/>
+						</bean>			
+						
+						
+						
+							
+				<!-- 第二个网段是192.168.179.133 -->
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7000"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7001"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7002"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7003"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7004"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7005"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7006"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7007"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7008"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.133"/>
+								<constructor-arg name="port" value="7009"/>
+						</bean>
+						
+						
+						<!-- 第三个是192.168.179.134 网段的 -->
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7000"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7001"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7002"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7003"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7004"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7005"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7006"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7007"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7008"/>
+						</bean>
+						<bean class="redis.clients.jedis.HostAndPort">
+								<constructor-arg name="host" value="192.168.179.134"/>
+								<constructor-arg name="port" value="7009"/>
+						</bean>
+						
+				</set>
+		</constructor-arg>
+		
+	</bean>	
+	
+	
+	
+	
+</beans>

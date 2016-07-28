@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.taotao_1</groupId>
+    <artifactId>TaoTao_Parent_1</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>org.taotao_1</groupId>
+  <artifactId>TaoTao_SSO_Web_1</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>war</packaging>
+  <name>TaoTao_SSO_Web_1</name>
+  <description>用户的相关操作	
+</description>
+
+  <dependencies>
+  <!-- 配置一个Interface依赖 -->
+  <dependency>
+  			<groupId>org.taotao_1</groupId>
+  			<artifactId>TaoTao_Manager_Interface_1</artifactId>
+  			<version>${project.version}</version>
+  </dependency>
+  <dependency>
+  			<groupId>org.taotao_1</groupId>
+  			<artifactId>TaoTao_Content_Interface_1</artifactId>
+  			<version>${project.version}</version>
+  </dependency>
+  <dependency>
+  			<groupId>org.taotao_1</groupId>
+  			<artifactId>TaoTao_Search_Interface_1</artifactId>
+  			<version>${project.version}</version>
+  </dependency>
+    <dependency>
+  		<groupId>org.taotao_1</groupId>
+  		<artifactId>TaoTao_User_Interface_1</artifactId>
+  		<version>${project.version}</version>
+  </dependency>
+ 		<!-- 依赖图片服务	启动的客户端 -->
+ 		<dependency>
+ 			<groupId>fastdfs_client</groupId>
+ 			<artifactId>fastdfs_client</artifactId>
+ 			<version>1.25</version>
+ 		</dependency>
+ 		<!-- JSP相关 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 文件上传组件 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+		<!-- activeMQ 和spring整合所需要的jar包 -->
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-all</artifactId>
+		</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jms</artifactId>
+			</dependency>
+		<!-- dubbo依赖的jar包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+		</dependency>
+  </dependencies>
+
+ <!-- 配置tomcat的插件 -->
+  <build>
+  		<plugins>
+				<plugin>
+					<groupId>org.apache.tomcat.maven</groupId>
+					<artifactId>tomcat7-maven-plugin</artifactId>
+					<configuration>
+							<path>/</path>
+						<port>117</port>
+					    <ajpPort>8037</ajpPort>
+					</configuration>
+				</plugin>  		
+  		</plugins>
+  </build>
+
+</project>

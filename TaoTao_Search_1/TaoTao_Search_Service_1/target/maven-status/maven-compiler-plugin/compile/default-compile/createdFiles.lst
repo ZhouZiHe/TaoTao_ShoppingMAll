@@ -1,0 +1,3 @@
+org\taotao\search\service\impl\SearchItemServiceImpl.class
+org\taotao\search\activemq_listener\SearchActiveMQItemAddListener.class
+org\taotao\search\service\impl\SearchServiceImpl.class

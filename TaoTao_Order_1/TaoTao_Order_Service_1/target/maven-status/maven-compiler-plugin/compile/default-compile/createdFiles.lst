@@ -1,0 +1,5 @@
+org\taotao\jedisclient\impl\PoolJedisClientImpl.class
+org\taotao\jedisclient\impl\JedisClusterClientImpl.class
+org\taotao\cart\service\impl\CartServiceImpl$1.class
+org\taotao\order\service\impl\OrderServiceImpl.class
+org\taotao\cart\service\impl\CartServiceImpl.class

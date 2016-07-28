@@ -1,0 +1,3 @@
+org\taotao\search\mapper\SearchItemMapper.class
+org\taotao\search\dao\SearchDao.class
+org\taotao\search\dao\impl\SearchDaoImpl.class

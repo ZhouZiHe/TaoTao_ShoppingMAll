@@ -1,0 +1,3 @@
+org\taotao\order\service\OrderService.class
+org\taotao\cart\service\CartService.class
+org\taotao\jedisclient\JedisClient.class

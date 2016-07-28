@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:tool="http://www.springframework.org/schema/tool"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd  
+	http://www.springframework.org/schema/context  
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+	http://code.alibabatech.com/schema/dubbo  
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd  
+	http://www.springframework.org/schema/aop  
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd  
+	http://www.springframework.org/schema/mvc  
+	http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd  
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+	http://www.springframework.org/schema/tool   
+	http://www.springframework.org/schema/tool/spring-tool-4.0.xsd  
+	http://www.springframework.org/schema/util  
+	http://www.springframework.org/schema/util/spring-util-4.0.xsd " >
+	<!-- 配置扫描的包 -->
+ 	<context:component-scan base-package="org.taotao.freemaker" /> 
+	<!-- 配置加载配置文件 -->
+	<context:property-placeholder location="classpath:resource/resource.properties" />
+	<!-- 配置注解扫描 -->
+	<mvc:annotation-driven />
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!-- 配置资源映射 -->
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/images/" mapping="/images/**"/>
+	<!-- 配置生成freemaker -->
+	<bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+			<property name="templateLoaderPath" value="/WEB-INF/freemarker/"/><!-- 模板路径 -->
+			<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
+				
+<!-- 配置一个activeMQConnectionFactory -->
+	<bean id="activeMQConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://192.168.179.133:61616" />
+	</bean>
+<!-- 配置一个spring管理的connectionFactory -->		
+	<bean id="singleConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory">
+		<property name="targetConnectionFactory" ref="activeMQConnectionFactory" />	
+	</bean>
+<!-- 配置spring的JMS工具类模板 -->	
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+			<property name="connectionFactory" ref="singleConnectionFactory"/>
+	</bean>
+<!-- 配置一个队列的目的对象 -->
+	<bean id="activeMQQueue" class="org.apache.activemq.command.ActiveMQQueue">
+			<constructor-arg value="item-queue" />
+	</bean>
+<!-- 配置一个话题目的对象 -->
+	<bean id="activeMQTopic" class="org.apache.activemq.command.ActiveMQTopic">
+			<constructor-arg value="item-add-topic"/>
+	</bean>
+	
+<!-- 配置一个MessageListener事件监听器 -->	
+	<bean id="freeMakerAddItemListener" class="org.taotao.freemaker.listener.FreeMakerAddItemListener"/>
+	<!-- 配置jms监听器 -->
+	<bean id="defaultMessageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="singleConnectionFactory"/>
+		<property name="destination"  ref="activeMQTopic"/>
+		<property name="messageListener" ref="freeMakerAddItemListener"></property>
+	</bean>
+	
+	<!--  配置dubbo服务 
+	<dubbo:application name="taotao-search-web"/>
+	<dubbo:registry address="multicast://224.5.6.7:1234" />
+	 <dubbo:registry protocol="zookeeper" address="192.168.179.132:2181"/>	
+	<dubbo:reference interface="org.taotao.search.service.SearchService" id="searchService"/> -->
+</beans>
